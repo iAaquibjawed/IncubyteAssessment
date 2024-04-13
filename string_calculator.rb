@@ -1,7 +1,11 @@
 class StringCalculator
   def self.add(numbers)
     return 0 if numbers.empty?
-    return numbers.to_i
+    delimiter = detect_delimiter(numbers)
+    numbers = parse_numbers(numbers, delimiter)
+    negatives = numbers.select { |num| num < 0 }
+    raise "negative numbers not allowed #{negatives.join(',')}" if negatives.any?
+    numbers.sum
   end
 
   def self.detect_delimiter(numbers)
