@@ -7,5 +7,10 @@ class StringCalculator
   def self.detect_delimiter(numbers)
     numbers[0] == '/' && numbers[1] == '/' ? numbers[2] : /[,\n]/
   end
+
+  def self.parse_numbers(numbers, delimiter)
+    numbers = numbers.gsub(%r{//\[.*?\]\n}, '') 
+    numbers.split(delimiter).map(&:to_i)
+  end
 end
   
